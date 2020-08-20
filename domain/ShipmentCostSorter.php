@@ -8,15 +8,9 @@ class ShipmentCostSorter
 
     protected $shipmentSuppliers;
 
-    public function __construct(OrderProduct $orderProduct, array $shipmentSuppliers)
+    public function __construct(array $shipmentSuppliers)
     {
-        $this->orderProduct = $orderProduct;
         $this->shipmentSuppliers = $shipmentSuppliers;
-    }
-
-    public function orderProduct(): OrderProduct
-    {
-        return $this->orderProduct;
     }
 
     public function shipmentSuppliers(): array
@@ -24,17 +18,17 @@ class ShipmentCostSorter
         return $this->shipmentSuppliers;
     }
 
-    public function calculateAndSort()
+    public function calculateAndSort(OrderProduct $orderProduct)
     {
-        $result = array_map(function(ShipmentSupplier $shipmentSupplier) {
-            if (!$shipmentSupplier->canHandle($this->orderProduct())) {
+        $result = array_map(function(ShipmentSupplier $shipmentSupplier) use ($orderProduct) {
+            if (!$shipmentSupplier->canHandle($orderProduct)) {
                 return;
             }
 
-            $shipmentCost = $shipmentSupplier->calculate($this->orderProduct);
+            $shipmentCost = $shipmentSupplier->calculate($orderProduct);
 
             return new OrderShipingProduct(
-                $this->orderProduct,
+                $orderProduct,
                 $shipmentSupplier,
                 $shipmentCost
             );

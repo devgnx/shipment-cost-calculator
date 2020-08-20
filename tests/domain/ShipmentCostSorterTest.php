@@ -33,14 +33,13 @@ $costPerDistance = 0.01;
 $transboaLimits = new WeightLimit(5.1);
 $transboa = new ShipmentSupplier($name, $fixedCost, $costPerDistance, $transboaLimits);
 
-it('asserts Shipment Cost Sorter read-only values', function() use ($headset, $boaDex, $transboaLight, $transboa) {
-    $costSorter = new ShipmentCostSorter($headset, [
-        $boaDex,
-        $transboaLight,
-        $transboa
-    ]);
+$costSorter = new ShipmentCostSorter([
+    $boaDex,
+    $transboaLight,
+    $transboa
+]);
 
-    assertEquals($headset, $costSorter->orderProduct());
+it('asserts Shipment Cost Sorter read-only values', function() use ($boaDex, $transboaLight, $transboa, $costSorter) {
     assertEquals([
         $boaDex,
         $transboaLight,
@@ -48,14 +47,7 @@ it('asserts Shipment Cost Sorter read-only values', function() use ($headset, $b
     ], $costSorter->shipmentSuppliers());
 });
 
-it('asserts Headset cost sort', function() use ($headset, $boaDex, $transboaLight, $transboa) {
-
-    $costSorter = new ShipmentCostSorter($headset, [
-        $boaDex,
-        $transboaLight,
-        $transboa
-    ]);
-
+it('asserts Headset cost sort', function() use ($headset, $boaDex, $transboaLight, $costSorter) {
     $headsetboaDex = new OrderShipingProduct($headset, $boaDex, $boaDex->calculate($headset));
     $headsetTransboaLight = new OrderShipingProduct($headset, $transboaLight, $transboaLight->calculate($headset));
 
@@ -66,16 +58,10 @@ it('asserts Headset cost sort', function() use ($headset, $boaDex, $transboaLigh
     assertEquals([
         $headsetboaDex,
         $headsetTransboaLight
-    ], $costSorter->calculateAndSort());
+    ], $costSorter->calculateAndSort($headset));
 });
 
-it('asserts PC Gamer allowed shipment', function() use ($pcGamer, $boaDex, $transboaLight, $transboa) {
-    $costSorter = new ShipmentCostSorter($pcGamer, [
-        $boaDex,
-        $transboaLight,
-        $transboa
-    ]);
-
+it('asserts PC Gamer allowed shipment', function() use ($pcGamer, $boaDex, $transboa, $costSorter) {
     $pcGamerboaDex = new OrderShipingProduct($pcGamer, $boaDex, $boaDex->calculate($pcGamer));
     $pcGamerTransboa = new OrderShipingProduct($pcGamer, $transboa, $transboa->calculate($pcGamer));
 
@@ -86,5 +72,5 @@ it('asserts PC Gamer allowed shipment', function() use ($pcGamer, $boaDex, $tran
     assertEquals([
         $pcGamerTransboa,
         $pcGamerboaDex,
-    ], $costSorter->calculateAndSort());
+    ], $costSorter->calculateAndSort($pcGamer));
 });
