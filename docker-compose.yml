@@ -1,0 +1,30 @@
+version: '3.3'
+
+services:
+  database:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - '3310:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+      MYSQL_DATABASE: boacompra
+      MYSQL_USER: boacompra
+      MYSQL_PASSWORD: boacompra
+    volumes:
+      - dbdata:/var/lib/mysql/
+
+  app:
+    depends_on:
+      - database
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8181:80"
+    restart: always
+    volumes:
+      - ./:/var/www
+
+volumes:
+  dbdata: {}
