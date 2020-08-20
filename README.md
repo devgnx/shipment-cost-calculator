@@ -20,6 +20,6 @@ Test with code coverage
 ```sh
 php -d pcov.enabled=1 -d pcov.directory=. ./vendor/bin/pest --coverage
 
-# Or to generate a html coverage
+# Or to generate html coverage
 php -d pcov.enabled=1 -d pcov.directory=. ./vendor/bin/pest --coverage-html coverage-reports
 ```
