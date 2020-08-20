@@ -8,4 +8,5 @@ services:
     ports:
       - "8181:80"
     restart: always
-
+    volumes:
+      - ./:/var/www

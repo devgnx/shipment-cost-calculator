@@ -9,6 +9,14 @@ Boa compra - Shipment cost calculator
 - [Docker Compose](https://docs.docker.com/compose/)
 - [PCOV - Test Coverage Driver](https://github.com/krakjoe/pcov)
 
+## Usage
+
+Run docker compose up to initialize app
+
+```php
+docker-compose up --build --force-recreate -d
+```
+
 ## Tests
 
 Test using [Pest - PHP Testing Framework](https://pestphp.com/)
