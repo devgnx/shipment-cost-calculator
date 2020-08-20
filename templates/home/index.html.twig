@@ -4,4 +4,32 @@
 
 {% block body %}
     <h1>Bem Vindo</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Distância (Km)</th>
+                <th>Peso (Kg)</th>
+                <th>Empresa</th>
+                <th>Valor fixo</th>
+                <th>Valor km/kg</th>
+                <th>Custo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for productGroup in products %}
+                {% for product in productGroup %}
+                    <tr>
+                        <td>{{ product.orderProduct.description }}</td>
+                        <td>{{ product.orderProduct.distance }}Km</td>
+                        <td>{{ product.orderProduct.weight }}Kg</td>
+                        <td>{{ product.shipmentSupplier.name }}</td>
+                        <td>{{ product.shipmentSupplier.fixedCost }}</td>
+                        <td>{{ product.shipmentSupplier.costPerDistance }}</td>
+                        <td>{{ product.shipmentCost | format_currency('BRL', locale='pt-BR') }}</td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
