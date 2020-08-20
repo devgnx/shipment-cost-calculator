@@ -3,20 +3,20 @@
 Boa compra - Shipment cost calculator
 
 ## Requirements
-- PHP minimum v7.4.3
-- Composer v1.8
-- Docker
-- Docker Compose
-- PCOV - Test Coverage Driver
+- [PHP v7.4.3](https://www.php.net/releases#7.4.3)
+- [Composer](https://getcomposer.org/doc/00-intro.md/)
+- [Docker](https://docs.docker.com/engine/)
+- [Docker Compose](https://docs.docker.com/compose/)
+- [PCOV - Test Coverage Driver](https://github.com/krakjoe/pcov)
 
 ## Tests
 
-Test using Pest - PHP Testing Framework  
+Test using [Pest - PHP Testing Framework](https://pestphp.com/)
 ```sh/
 ./vendor/bin/pest
 ```
 
-Test with code coverage  
+Test with code coverage using PCOV 
 ```sh
 php -d pcov.enabled=1 -d pcov.directory=. ./vendor/bin/pest --coverage
 
