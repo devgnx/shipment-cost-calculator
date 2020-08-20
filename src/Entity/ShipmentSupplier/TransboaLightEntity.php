@@ -3,11 +3,13 @@
 namespace App\Entity\ShipmentSupplier;
 
 use Domain\ShipmentSupplier;
+use Domain\ValueObject\WeightLimit;
 
 class TransboaLightEntity extends ShipmentSupplier
 {
     public function __construct()
     {
-        parent::__construct('Transboa (até 5kg)', 2.10, 1.1);
+        $weightLimit = new WeightLimit(null, 5);
+        parent::__construct('Transboa (até 5kg)', 2.10, 1.1, $weightLimit);
     }
 }
