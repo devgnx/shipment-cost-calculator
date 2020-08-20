@@ -3,33 +3,49 @@
 {% block title 'Home' %}
 
 {% block body %}
-    <h1>Bem Vindo</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Produto</th>
-                <th>Distância (Km)</th>
-                <th>Peso (Kg)</th>
-                <th>Empresa</th>
-                <th>Valor fixo</th>
-                <th>Valor km/kg</th>
-                <th>Custo</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for productGroup in products %}
-                {% for product in productGroup %}
+<div class="container mx-auto">
+    <div class="mt-24 mb-10">
+        <h1 class="text-4xl">Tabela de custos</h1>
+        <p class="text-base">Valores de cada transportadora para envio de brindes do sorteio Boa Compra.</p>
+    </div>
+
+    {% for productGroup in products %}
+        <div class="rounded overflow-hidden shadow-md mb-8 max-w-3xl md:flex p-8">
+            <div>
+                <h2 class="font-bold text-xl mb-2">{{ (productGroup | first).orderProduct.description }}</h2>
+                <p class="text-gray-700 text-base">
+                    Distância: {{ (productGroup | first).orderProduct.distance }}Km <br>
+                    Peso: {{ (productGroup | first).orderProduct.weight }}Kg <br>
+                </p>
+                <div class="mt-4 mb-3 border-t"></div>
+                <p class="text-gray-700 text-base">
+                    <strong>Melhor preço:</strong> <br>
+                    {{ (productGroup | first).shipmentSupplier.name }} <br> 
+                    {{ (productGroup | first).shipmentCost | format_currency('BRL', locale='pt-BR') }} <br>
+                </p>
+            </div>
+            <table class="ml-auto table-fixed">
+                <thead>
                     <tr>
-                        <td>{{ product.orderProduct.description }}</td>
-                        <td>{{ product.orderProduct.distance }}Km</td>
-                        <td>{{ product.orderProduct.weight }}Kg</td>
-                        <td>{{ product.shipmentSupplier.name }}</td>
-                        <td>{{ product.shipmentSupplier.fixedCost }}</td>
-                        <td>{{ product.shipmentSupplier.costPerDistance }}</td>
-                        <td>{{ product.shipmentCost | format_currency('BRL', locale='pt-BR') }}</td>
+                        <th class="px-4 py-2 text-left">Empresa</th>
+                        <th class="px-4 py-2">Valor fixo</th>
+                        <th class="px-4 py-2">Valor km/kg</th>
+                        <th class="px-4 py-2 text-right">Custo</th>
                     </tr>
-                {% endfor %}
-            {% endfor %}
-        </tbody>
-    </table>
+                </thead>
+                <tbody>
+                    {% for product in productGroup %}
+                        <tr class="{{ cycle(['bg-gray-200', ''], loop.index0) }}">
+                            <td class="px-3 py-2">{{ product.shipmentSupplier.name }}</td>
+                            <td class="px-3 py-2 text-right">{{ product.shipmentSupplier.fixedCost | format_currency('BRL', locale='pt-BR') }}</td>
+                            <td class="px-3 py-2 text-right">{{ product.shipmentSupplier.costPerDistance | format_number(locale='pt-BR') }}Km</td>
+                            <td class="px-3 py-2 text-right">{{ product.shipmentCost | format_currency('BRL', locale='pt-BR') }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <hr class="hidden">
+    {% endfor %}
+</div>
 {% endblock %}
