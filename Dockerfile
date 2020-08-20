@@ -8,7 +8,7 @@ RUN apt-get update && \
     LC_ALL=C.UTF-8 apt-get install -y software-properties-common && \
     LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php && \
     apt-get update && \
-    apt-get install -y php7.4-cli php7.4-fpm php7.4-json php7.4-zip php7.4-mbstring php7.4-curl php7.4-xml php7.4-bcmath
+    apt-get install -y php7.4-cli php7.4-fpm php7.4-json php7.4-zip php7.4-mbstring php7.4-curl php7.4-xml php7.4-bcmath php7.4-intl
 
 RUN phpenmod pdo_mysql
 
