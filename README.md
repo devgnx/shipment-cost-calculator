@@ -2,7 +2,11 @@
 
 Boa compra - Shipment cost calculator
 
+This projects uses TDD and DDD aproches with also pure functions 
+and immutable objects at the Domain layer.
+
 ## Requirements
+
 - [PHP v7.4.3](https://www.php.net/releases#7.4.3)
 - [Composer](https://getcomposer.org/doc/00-intro.md/)
 - [Docker](https://docs.docker.com/engine/)
