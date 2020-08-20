@@ -22,27 +22,27 @@ $boaDex = new ShipmentSupplier($name, $fixedCost, $costPerDistance);
 $name = 'Transboa (até 5Kg)';
 $fixedCost = 2.1;
 $costPerDistance = 1.1;
-$transboaSmallLimits = new WeightLimit(null, 5);
-$transboaSmall = new ShipmentSupplier($name, $fixedCost, $costPerDistance, $transboaSmallLimits);
+$transboaLightLimits = new WeightLimit(null, 5);
+$transboaLight = new ShipmentSupplier($name, $fixedCost, $costPerDistance, $transboaLightLimits);
 
 $name = 'Transboa (+5Kg)';
 $fixedCost = 10;
 $costPerDistance = 0.01;
-$transboaLargeLimits = new WeightLimit(5.1);
-$transboaLarge = new ShipmentSupplier($name, $fixedCost, $costPerDistance, $transboaLargeLimits);
+$transboaLimits = new WeightLimit(5.1);
+$transboa = new ShipmentSupplier($name, $fixedCost, $costPerDistance, $transboaLimits);
 
-it('asserts Headset allowed shipment', function() use ($headset, $boaDex, $transboaSmall, $transboaLarge) {
+it('asserts Headset allowed shipment', function() use ($headset, $boaDex, $transboaLight, $transboa) {
     assertTrue($boaDex->canHandle($headset));
 
-    assertTrue($transboaSmall->canHandle($headset));
+    assertTrue($transboaLight->canHandle($headset));
 
-    assertFalse($transboaLarge->canHandle($headset));
+    assertFalse($transboa->canHandle($headset));
 });
 
-it('asserts PC Gamer allowed shipment', function() use ($pcGamer, $boaDex, $transboaSmall, $transboaLarge) {
+it('asserts PC Gamer allowed shipment', function() use ($pcGamer, $boaDex, $transboaLight, $transboa) {
     assertTrue($boaDex->canHandle($pcGamer));
 
-    assertFalse($transboaSmall->canHandle($pcGamer));
+    assertFalse($transboaLight->canHandle($pcGamer));
 
-    assertTrue($transboaLarge->canHandle($pcGamer));
+    assertTrue($transboa->canHandle($pcGamer));
 });
