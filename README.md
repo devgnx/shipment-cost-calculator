@@ -2,7 +2,7 @@
 
 Boa compra - Shipment cost calculator
 
-This projects uses TDD and DDD aproches with also pure functions 
+This project uses TDD and DDD aproches with also pure functions 
 and immutable objects at the Domain layer.
 
 ## Requirements
@@ -18,7 +18,7 @@ and immutable objects at the Domain layer.
 Run docker compose up to initialize app
 
 ```php
-docker-compose up --build --force-recreate -d
+docker-compose up -d
 ```
 
 ## Tests
