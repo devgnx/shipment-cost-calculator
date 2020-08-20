@@ -13,12 +13,6 @@ $fixedCost = 10;
 $costPerDistance = 0.05;
 $boaDex = new ShipmentSupplier($name, $fixedCost, $costPerDistance);
 
-
-$name = 'BoaDex';
-$fixedCost = 10;
-$costPerDistance = 0.05;
-$boaDex = new ShipmentSupplier($name, $fixedCost, $costPerDistance);
-
 it('asserts Order Product read-only values', function() use ($orderProduct) {
     assertEquals('Fone de ouvido Gamer', $orderProduct->description());
     assertEquals(65, $orderProduct->distance());
